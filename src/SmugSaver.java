@@ -56,7 +56,8 @@ import java.lang.Integer;
  * resolution photos in a public Smugmug album.  Good for sharing pictures
  * with your friends.
  * Author: Rusty Sammon (rustysammon@yahoo.com)
- * Date: 12/25/2006
+ * Created: 12/25/2006
+ * Modified: 8/27/2008
  * Designed using JRE 1.5.0_10, but might work on other ones as well 
  */
 public class SmugSaver extends javax.swing.JFrame {
@@ -137,7 +138,7 @@ public class SmugSaver extends javax.swing.JFrame {
 			{
 				usernameField = new JTextField();
 				getContentPane().add(usernameField);
-				usernameField.setText("rustysammon");
+				usernameField.setText("rustysam");
 				usernameField.setBounds(84, 7, 112, 28);
 			}
 	

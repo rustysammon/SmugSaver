@@ -119,8 +119,8 @@ public class DownloadThread extends Thread {
 			NodeList imageNodes = document.getElementsByTagName("OriginalURL");
 			ArrayList<String> imageURLs = new ArrayList<String>();
 			for (int i=0; i<imageNodes.getLength(); i++) {
-				String largeURL = imageNodes.item(i).getTextContent();
-				imageURLs.add(largeURL);
+				String originalURL = imageNodes.item(i).getTextContent();
+				imageURLs.add(originalURL);
 				//System.out.println(originalURL);
 			}
 			return imageURLs;	
@@ -141,7 +141,8 @@ public class DownloadThread extends Thread {
     		//System.out.println("selected album: " + albumName.toString());
 
     		//Create the directory for the album, if necessary
-    		File directory = new File(baseDirectory.toString()+"\\"+albumName.toString());
+    		File directory = new File(baseDirectory.toString()+ File.separator +
+    				albumName.toString());
     		if (!directory.exists()) {
     			//create new directory for album
     			if (!directory.mkdir()) {
@@ -172,7 +173,8 @@ public class DownloadThread extends Thread {
     			" -- " + imageName;	
 
     			//do the download
-    			String localFilename = directory + "\\" + imageName;
+    			String localFilename = directory + File.separator + imageName;
+    			System.out.println("localFilename: " + localFilename);
     			FileDownload.download(imageURL, localFilename);	
     			totalImageCount++;
     			
