@@ -35,6 +35,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import java.lang.Exception;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.lang.Integer;
 
 /**
@@ -267,8 +268,8 @@ public class SmugSaver extends javax.swing.JFrame {
 			URL loginUrl = new URL(urlBase + 
 					"?method=smugmug.login.anonymously" +
 					"&APIKey=" + apiKey);				
-			//System.out.println("Attempting login with:");
-			//System.out.println("  " + loginUrl);
+			System.out.println("Attempting login with:");
+			System.out.println("  " + loginUrl);
 			InputStream stream = loginUrl.openStream();
 			
 			/*
@@ -333,7 +334,14 @@ public class SmugSaver extends javax.swing.JFrame {
 			for (int i=0; i<albumNodes.getLength(); i++) {
 				AlbumInfo albumInfo = new AlbumInfo(albumNodes.item(i));
 				albumInfoList.add(albumInfo);
-				pickAlbumListModel.addElement(albumInfo.getTitle());	
+			}
+			
+			//sort the albums according to their titles (comparator defined in AlbumInfo class)
+			Collections.sort(albumInfoList);
+			
+			//display the sorted list to the user
+			for (int i=0; i<albumInfoList.size(); i++) {
+				pickAlbumListModel.addElement(albumInfoList.get(i).getTitle());	
 			}
 			
 		} catch (IOException io) {
@@ -403,14 +411,14 @@ public class SmugSaver extends javax.swing.JFrame {
 			
 			//verify that we have the album info in our list
 			for (String albumName : selectedAlbums) {
-				boolean foundAblum = false;
+				boolean foundAlbum = false;
 				for (AlbumInfo albumInfo : albumInfoList) {
 					if (albumName.toString().equals(albumInfo.getTitle())) {
-						foundAblum = true;
+						foundAlbum = true;
 						break;
 					}
 				}
-				if (!foundAblum) {
+				if (!foundAlbum) {
 					feedbackTextArea.setText("Invalid album selected - no album info available.\n" + 
 											 "Album Name: " + albumName);
 					return;

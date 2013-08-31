@@ -9,7 +9,7 @@ import org.w3c.dom.Node;
  * Date: 12/25/2006
  * Designed using JRE 1.5.0_10, but might work on other ones as well 
  */
-public class AlbumInfo {
+public class AlbumInfo implements Comparable<AlbumInfo> {
 	private String id;
 	private String title;
 	private String imageCount;
@@ -67,4 +67,10 @@ public class AlbumInfo {
 	public void setLastUpdated(String lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
+	
+	@Override
+	public int compareTo(AlbumInfo arg0) {
+		return( arg0.title.compareTo( title ));
+	}
+
 }
